@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uts_osy/pages/list_products.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -53,14 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              'Store Admin',
+                              'Financial Planning',
                               style: TextStyle(
-                                  fontFamily: "Montserrat Medium",
-                                  color: Colors.white,
-                                  fontSize: 20),
+                                fontFamily: "Montserrat Medium",
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
-                              '1931710075 MI2C',
+                              'OSY - 1931710075 MI2C',
                               style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.white,
@@ -95,35 +98,44 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: EdgeInsets.only(bottom: 12),
                                 child: Text(
-                                  'Customers',
+                                  'Transaction History',
                                   style: cardTextStyle,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  width: 100,
-                                  child:
-                                      Image.asset('assets/images/products.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => List_Product()),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    width: 100,
+                                    child: Image.asset(
+                                        'assets/images/products.png'),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 12),
-                                child: Text(
-                                  'Products',
-                                  style: cardTextStyle,
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  child: Text(
+                                    'Purchase Plan',
+                                    style: cardTextStyle,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Card(
@@ -143,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: EdgeInsets.only(bottom: 12),
                                 child: Text(
-                                  'Purchase',
+                                  'Calculate Transactions',
                                   style: cardTextStyle,
                                 ),
                               ),
@@ -167,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: EdgeInsets.only(bottom: 12),
                                 child: Text(
-                                  'About Store',
+                                  'About Me',
                                   style: cardTextStyle,
                                 ),
                               ),
@@ -185,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
-          height: 70,
+          height: 60,
           color: Colors.cyan,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -193,25 +205,25 @@ class _HomeScreenState extends State<HomeScreen> {
               Icon(
                 Icons.home,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               Icon(
                 Icons.person,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
               IconButton(
                 icon: Icon(
                   Icons.add_box,
                   color: Colors.white,
-                  size: 37,
+                  size: 30,
                 ),
                 onPressed: () {},
               ),
               Icon(
                 Icons.settings,
                 color: Colors.white,
-                size: 40,
+                size: 30,
               ),
             ],
           ),

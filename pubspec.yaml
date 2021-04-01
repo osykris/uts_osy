@@ -32,6 +32,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  sqflite: ^2.0.0+3
+  path_provider: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -47,6 +49,7 @@ flutter:
   assets:
     - assets/images/top_header.png
     - assets/images/admin.jpg
+    - assets/images/Shoppingfun.jpg
     - assets/images/customers.png
     - assets/images/shopping.png
     - assets/images/products.png
