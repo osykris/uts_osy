@@ -3,34 +3,44 @@ import 'package:uts_osy/db_helper.dart';
 import 'package:uts_osy/models/product.dart';
 
 class Entry_Product extends StatefulWidget {
-  final Product list;
-  Entry_Product(this.list);
+  final Product product;
+  Entry_Product(this.product);
   @override
-  Entry_ProductState createState() => Entry_ProductState(this.list);
+  Entry_ProductState createState() => Entry_ProductState(this.product);
 }
 
 //class controller
 class Entry_ProductState extends State<Entry_Product> {
-  Product list;
   DbHelper dbHelper = DbHelper();
-  Entry_ProductState(this.list);
+  Product product;
+  Entry_ProductState(this.product);
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //kondisi
-    if (list != null) {
-      nameController.text = list.name;
-      quantityController.text = list.quantity.toString();
-      priceController.text = list.price.toString();
+    bool check = false;
+    if (product != null) {
+      nameController.text = product.name;
+      quantityController.text = product.quantity.toString();
+      priceController.text = product.price.toString();
+      check = true;
     }
     //rubah
     return Scaffold(
         appBar: AppBar(
-          title: list == null
-              ? Text('New planning', style: TextStyle(color: Colors.white))
-              : Text('Change'),
+          title: product == null
+              ? Text('New Planning',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24))
+              : Text('Edit',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24)),
           leading: new IconButton(
             icon: Icon(
               Icons.keyboard_arrow_left,
@@ -42,7 +52,7 @@ class Entry_ProductState extends State<Entry_Product> {
           ),
         ),
         body: Padding(
-          padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
+          padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
           child: ListView(
             children: <Widget>[
               // nama
@@ -90,7 +100,6 @@ class Entry_ProductState extends State<Entry_Product> {
                   onChanged: (value) {},
                 ),
               ),
-              // tombol button
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
                 child: Row(
@@ -104,22 +113,20 @@ class Entry_ProductState extends State<Entry_Product> {
                           'Save',
                           textScaleFactor: 1.5,
                         ),
-                        onPressed: () async {
-                          if (list == null) {
-                            // tambah data
-                            list = Product(
+                        onPressed: () {
+                          if (product == null) {
+                            product = Product(
                                 nameController.text,
                                 int.parse(quantityController.text),
                                 int.parse(priceController.text));
                           } else {
-                            // ubah data
-                            list.name = nameController.text;
-                            list.quantity = int.parse(quantityController.text);
-                            list.price = int.parse(priceController.text);
-                            var result = await dbHelper.update(list);
+                            product.name = nameController.text;
+                            product.quantity =
+                                int.parse(quantityController.text);
+                            product.price = int.parse(priceController.text);
                           }
-                          // kembali ke layar sebelumnya dengan membawa objek item
-                          Navigator.pop(context, list);
+                          // kembali ke layar sebelumnya dengan membawa objek perencanaan
+                          Navigator.pop(context, product);
                         },
                       ),
                     ),

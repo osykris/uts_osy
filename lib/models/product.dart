@@ -16,7 +16,7 @@ class Product {
   set price(value) => this._price = value;
 
   // konstruktor versi 1
-  Product( this._name, this._quantity, this._price);
+  Product(this._name, this._quantity, this._price);
 
   // konstruktor versi 2: konversi dari Map ke Item
   Product.fromMap(Map<String, dynamic> map) {

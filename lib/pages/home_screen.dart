@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uts_osy/pages/calculate_transaction.dart';
+import 'package:uts_osy/pages/list_entry.dart';
 import 'package:uts_osy/pages/list_products.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -81,28 +83,37 @@ class _HomeScreenState extends State<HomeScreen> {
                       primary: false,
                       crossAxisCount: 2,
                       children: <Widget>[
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  width: 170,
-                                  child: Image.asset(
-                                      'assets/images/customers.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EntryEntry()),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    width: 170,
+                                    child: Image.asset(
+                                        'assets/images/customers.png'),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 12),
-                                child: Text(
-                                  'Transaction History',
-                                  style: cardTextStyle,
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  child: Text(
+                                    'Money Entry',
+                                    style: cardTextStyle,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         GestureDetector(
@@ -138,28 +149,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  width: 100,
-                                  child:
-                                      Image.asset('assets/images/shopping.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CalculateTransaction()),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    width: 100,
+                                    child: Image.asset(
+                                        'assets/images/shopping.png'),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 12),
-                                child: Text(
-                                  'Calculate Transactions',
-                                  style: cardTextStyle,
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  child: Text(
+                                    'Calculate Transactions',
+                                    style: cardTextStyle,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                         Card(
@@ -194,40 +214,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-      ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60,
-          color: Colors.cyan,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Icon(
-                Icons.home,
-                color: Colors.white,
-                size: 30,
-              ),
-              Icon(
-                Icons.person,
-                color: Colors.white,
-                size: 30,
-              ),
-              IconButton(
-                icon: Icon(
-                  Icons.add_box,
-                  color: Colors.white,
-                  size: 30,
-                ),
-                onPressed: () {},
-              ),
-              Icon(
-                Icons.settings,
-                color: Colors.white,
-                size: 30,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
