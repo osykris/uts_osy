@@ -21,7 +21,7 @@ class DbHelper {
     return itemDatabase;
   }
 
-  //buat tabel baru dengan nama item
+  //buat tabel baru dengan nama product dan etry
   void _createDb(Database db, int version) async {
     await db.execute('''
  CREATE TABLE product (

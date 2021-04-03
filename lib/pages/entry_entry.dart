@@ -3,41 +3,48 @@ import 'package:uts_osy/db_helper.dart';
 import 'package:uts_osy/models/entry.dart';
 
 class EntryInput extends StatefulWidget {
-  final Entry entry;
-  EntryInput(this.entry);
+  // pembuatan class EntryInputn yang memperluaskan statefullwidget
+  final Entry entry; // objek entry dari Class Entry bertype final
+  EntryInput(this.entry); //konstruktor yang menerima parameter entry
   @override
   EntryInputState createState() => EntryInputState(this.entry);
 }
 
 //class controller
 class EntryInputState extends State<EntryInput> {
-  DbHelper dbHelper = DbHelper();
-
+  DbHelper dbHelper = DbHelper(); //pembuatan obejk dbHelper dari class DBHelper
   int count = 0;
-  List<Entry> itemList;
+  ///variabel count dengan type data int yang menamung angka 0
+  List<Entry> itemList; //objek itemList yang merujuk dari List class Enntry
 
-  Entry entry;
-  EntryInputState(this.entry);
+  Entry entry; //objek entry dari class Entry
+  EntryInputState(this.entry); //konstruktor yang menerima parameter entry
+
+  //pembuatan text editing controller
   TextEditingController titleeController = TextEditingController();
   TextEditingController totalController = TextEditingController();
+
   void initState() {
+    //override fungsi initState() untuk melakukan generate daftar widget berdasarkan data yang sudah kita tambahkan
     super.initState();
-    // get_option();
   }
 
   @override
   Widget build(BuildContext context) {
-    //kondisi
-
-    bool check = false;
+    bool check =
+        false; // variabel check dengan type boolean yang menampung nilai false
+    //kondisi jika entry null
     if (entry != null) {
+      //variabel titlee dari entry ini diisi oleh nilai dari titleeController
       titleeController.text = entry.titlee.toString();
+      //variabel total dari entry ini diisi oleh nilai dari totalController
       totalController.text = entry.total.toString();
-      check = true;
+      check = true; //check bernilai true
     }
     //rubah
     return Scaffold(
         appBar: AppBar(
+          //kondisi jika entry null makaa text title Add New Entry jika tidak null maka Edit entry
           title: entry == null
               ? Text('Add New Entry',
                   style: TextStyle(
@@ -45,6 +52,7 @@ class EntryInputState extends State<EntryInput> {
                       fontWeight: FontWeight.bold,
                       fontSize: 24))
               : Text('Edit Entry'),
+          // tombol untuk menuju halaman sebelumnya
           leading: new IconButton(
             icon: Icon(
               Icons.keyboard_arrow_left,
@@ -59,6 +67,7 @@ class EntryInputState extends State<EntryInput> {
           padding: EdgeInsets.only(top: 15.0, left: 10.0, right: 10.0),
           child: ListView(
             children: <Widget>[
+              //pembuatan text field untuk penginputan
               // harga
               Padding(
                 padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
@@ -91,7 +100,7 @@ class EntryInputState extends State<EntryInput> {
                   },
                 ),
               ),
-              // tombol button
+              // tombol untuk proses save yang diinputkan oleh user
               Padding(
                 padding: EdgeInsets.only(top: 8.0, bottom: 20.0),
                 child: Row(
@@ -107,6 +116,7 @@ class EntryInputState extends State<EntryInput> {
                         ),
                         onPressed: () {
                           if (entry == null) {
+                            //jika kosong maka objek entry menerima inputan user
                             entry = Entry(titleeController.text,
                                 int.parse(totalController.text));
                           }
@@ -128,35 +138,13 @@ class EntryInputState extends State<EntryInput> {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context); // kembali ke layar sebelumnya
                         },
                       ),
                     ),
                   ],
                 ),
               ),
-              if (check == true)
-                Padding(
-                  padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: RaisedButton(
-                          color: Theme.of(context).primaryColorDark,
-                          textColor: Theme.of(context).primaryColorLight,
-                          child: Text(
-                            'Delete',
-                            textScaleFactor: 1.5,
-                          ),
-                          onPressed: () {
-                            dbHelper.deleteEntry(entry.entryId);
-                            Navigator.pop(context, entry);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                )
             ],
           ),
         ));

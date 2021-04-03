@@ -2,34 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:uts_osy/db_helper.dart';
 import 'package:uts_osy/models/product.dart';
 
-class Entry_Product extends StatefulWidget {
-  final Product product;
-  Entry_Product(this.product);
+class Entry_Product extends StatefulWidget {  // pembuatan class Entry_Product yang memperluaskan statefullwidget
+  final Product product; // objek product dari Class Product bertype final
+  Entry_Product(this.product); //konstruktor yang menerima parameter product
   @override
   Entry_ProductState createState() => Entry_ProductState(this.product);
 }
 
 //class controller
 class Entry_ProductState extends State<Entry_Product> {
-  DbHelper dbHelper = DbHelper();
-  Product product;
-  Entry_ProductState(this.product);
+
+  DbHelper dbHelper = DbHelper(); //pembuatan obejk dbHelper dari class DBHelper
+  Product product; //objek product dari class Product
+  Entry_ProductState(this.product); //konstruktor yang menerima parameter product
+
+  //pembuatan text editing controller
   TextEditingController nameController = TextEditingController();
   TextEditingController quantityController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //kondisi
-    bool check = false;
+    bool check = false; // variabel check dengan type boolean yang menampung nilai false
+    //kondisi jika entry null
     if (product != null) {
+      //variabel dari objek product akan merima inputan dari user
       nameController.text = product.name;
       quantityController.text = product.quantity.toString();
       priceController.text = product.price.toString();
-      check = true;
+      check = true; //check bernilai true
     }
     //rubah
     return Scaffold(
         appBar: AppBar(
+          //kondisi jika product null makaa text title New Planning jika tidak null maka Edit 
           title: product == null
               ? Text('New Planning',
                   style: TextStyle(
@@ -41,6 +47,7 @@ class Entry_ProductState extends State<Entry_Product> {
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24)),
+          // tombol untuk menuju halaman sebelumnya
           leading: new IconButton(
             icon: Icon(
               Icons.keyboard_arrow_left,
@@ -55,6 +62,7 @@ class Entry_ProductState extends State<Entry_Product> {
           padding: EdgeInsets.only(top: 20.0, left: 10.0, right: 10.0),
           child: ListView(
             children: <Widget>[
+              //pembuatan text field untuk penginputan
               // nama
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
@@ -100,6 +108,7 @@ class Entry_ProductState extends State<Entry_Product> {
                   onChanged: (value) {},
                 ),
               ),
+                // tombol untuk proses save yang diinputkan oleh user
               Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
                 child: Row(
@@ -114,12 +123,12 @@ class Entry_ProductState extends State<Entry_Product> {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          if (product == null) {
+                          if (product == null) { // jika objek product bernilai null maka objek product menerima inputan user
                             product = Product(
                                 nameController.text,
                                 int.parse(quantityController.text),
                                 int.parse(priceController.text));
-                          } else {
+                          } else { // jika tidak kosong maka proses pengeditan. Jadi inputan yang sudah ada diganti oleh nilai variabel dari objek product
                             product.name = nameController.text;
                             product.quantity =
                                 int.parse(quantityController.text);
@@ -143,7 +152,7 @@ class Entry_ProductState extends State<Entry_Product> {
                           textScaleFactor: 1.5,
                         ),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.pop(context); // kembali ke layar sebelumnya
                         },
                       ),
                     ),

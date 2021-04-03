@@ -1,8 +1,12 @@
+//pembuatan sebuah class Product yang nantinya akan digunakan pada fitur purchase planning
 class Product {
+   //deklarasi masing-masing variabel
   int _id;
   String _name;
   int _quantity;
   int _price;
+
+  //pembuatan getter setter
 
   int get id => _id;
 

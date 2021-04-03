@@ -5,12 +5,12 @@ import 'package:uts_osy/pages/calculate_transaction.dart';
 import 'package:uts_osy/pages/list_entry.dart';
 import 'package:uts_osy/pages/list_products.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget { // pembuatan class HomeScreen yang memperluaskan statefullwidget
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> { //pembuatan class _HomeScreenState yang mengextend State dari class HomeScreen
   @override
   Widget build(BuildContext context) {
     // to get size
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container(
+          Container( //banner
             height: size.height * .3,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
+                  //banner yang ada gambar dan keterangan
                   Container(
                     height: 64,
                     margin: EdgeInsets.only(bottom: 20),
@@ -77,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
+                  // Berisi fitur fitur (dengan card yang nanti jika diklik akan menuju ke halaman selanjutnya)
                   Expanded(
                     child: GridView.count(
                       mainAxisSpacing: 10,
@@ -223,6 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
+          //berisi text motivasi
           Padding(
             padding: const EdgeInsets.only(top: 515.0, left: 16, right: 16),
             child: Container(

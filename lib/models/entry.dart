@@ -1,7 +1,11 @@
+//pembuatan sebuah class Enrty yang nantinya akan digunakan pada fitur money entry
 class Entry{
+  //deklarasi masing-masing variabel
   int _entryId;
   String _title;
   int _total;
+
+  //pembuatan getter setter
 
   int get entryId => _entryId;
 

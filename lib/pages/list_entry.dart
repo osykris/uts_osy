@@ -14,25 +14,28 @@ class EntryEntry extends StatefulWidget {
 
 class EntryEntryState extends State<EntryEntry> {
   @override
-  DbHelper dbHelper = DbHelper();
+  DbHelper dbHelper = DbHelper(); //pembuatan obejk dbHelper dari class DBHelper
+  //variabel count dan total_money yang menampung nilai 0 bertype int
   int count = 0;
   int total_money = 0;
-  List<Entry> itemList;
+  List<Entry> itemList; // obejek itemList yang merujuk dari List class Enntry
 
-  @override
+  @override //override fungsi initState() untuk melakukan generate daftar widget berdasarkan data yang sudah kita tambahkan
   void initState() {
     super.initState();
-    updateListView();
+    updateListView(); // agar nantinya tampilan select db tetap ada walaupun aplikasi sudah diclose
   }
 
   Widget build(BuildContext context) {
     if (itemList == null) {
+      //kondisi jika kosong maka list dari classEntry akan diisi oleh obej itemList
       itemList = List<Entry>();
     }
     return Scaffold(
       key: _globalKey,
       appBar: AppBar(
         title: Text(
+          //header text
           'Money Entry',
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),
@@ -41,11 +44,11 @@ class EntryEntryState extends State<EntryEntry> {
       body: Column(children: [
         Expanded(
           child: Container(
-            child: Image.asset('assets/images/money.jpg'),
+            child: Image.asset('assets/images/money.jpg'), //banner
           ),
         ),
         Expanded(
-          child: createListView(),
+          child: createListView(), // memanggil fungsi dari createListView
         ),
         Container(
           height: 70,
@@ -59,21 +62,27 @@ class EntryEntryState extends State<EntryEntry> {
               left: 20.0,
               right: 20.0,
             ),
-            child: Text("Total : Rp. $total_money,00",
+            child: Text(
+                "Total : Rp. $total_money,00", //menampilkan total uang masuk
                 style: TextStyle(fontSize: 22, color: Colors.white)),
           ),
         )
       ]),
       floatingActionButton: FloatingActionButton(
+        // button
         onPressed: () async {
-          var item = await navigateToEntryForm(context, null);
+          var item = await navigateToEntryForm(
+              context, null); //memanggil navigateToEntryForm
           if (item != null) {
-            int result = await dbHelper.insertEntry(item);
+            //jika item tidak kosong
+            int result = await dbHelper.insertEntry(item); //memasukkan item
             setState(() {
-              this.total_money += item.total;
+              this.total_money +=
+                  item.total; // uangnya akan dijumlahkan sesuai pemasukkan uang
             });
             if (result > 0) {
-              updateListView();
+              //jika result lebih dari 0
+              updateListView(); //maka memanggil fungsi updateListView
             }
           }
         },
@@ -86,6 +95,7 @@ class EntryEntryState extends State<EntryEntry> {
     );
   }
 
+// fungsi untuk menuju ke halaman EntryInput ketika floating button dijalankkan
   Future<Entry> navigateToEntryForm(BuildContext context, Entry item) async {
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
@@ -94,6 +104,7 @@ class EntryEntryState extends State<EntryEntry> {
     return result;
   }
 
+  //pembuatan listview untuk menampilkan inputan database yang sebelumnya diinputkan oleh user
   ListView createListView() {
     TextStyle textStyle = Theme.of(context).textTheme.headline5;
     return ListView.builder(
@@ -119,7 +130,7 @@ class EntryEntryState extends State<EntryEntry> {
             trailing: GestureDetector(
               child: Icon(Icons.delete, color: Colors.red),
               onTap: () async {
-                //TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Item
+                //Panggil Fungsi untuk Delete dari DB berdasarkan Item
                 _showDeleteDialog(context, itemList[index].entryId);
               },
             ),
@@ -129,6 +140,7 @@ class EntryEntryState extends State<EntryEntry> {
     );
   }
 
+  //pembuatan objek globalkey sebagai  pendukung snackbar
   final GlobalKey<ScaffoldState> _globalKey = GlobalKey<ScaffoldState>();
 
   //Notofikasi telah terhapus di bawah sendiri nanti tampilannya
@@ -137,6 +149,7 @@ class EntryEntryState extends State<EntryEntry> {
     _globalKey.currentState.showSnackBar(_snackBar);
   }
 
+  //pembuatan dialog seperti popup
   _showDeleteDialog(BuildContext context, itemId) {
     return showDialog(
         context: context,
@@ -145,18 +158,22 @@ class EntryEntryState extends State<EntryEntry> {
           return AlertDialog(
             actions: <Widget>[
               FlatButton(
+                  //tombol batal yang nantinya dia akan kembali ke halaman sebelumnya
                   color: Colors.green,
                   onPressed: () => Navigator.pop(context),
                   child: Text("Cancel", style: TextStyle(color: Colors.white))),
               FlatButton(
+                  // tombol hapus dia akan memamnggil fungsi deleteEntry yang menerima parameter dari item yang diklik
                   color: Colors.red,
                   onPressed: () async {
                     var result = await dbHelper.deleteEntry(itemId);
-                    if (result > 0) {
-                      Navigator.pop(context);
-                      updateListView();
+                    if (result > 0) { //jika result lebih dari 0 maka
+                      Navigator.pop(context); //kembali kehalaman sebelumnya
+                      updateListView(); // setelah terhapus akan memanggil fungsi updateListview
                       _showSuccessSnackBar(Text("Deleted",
-                          style: TextStyle(color: Colors.white)));
+                          style: TextStyle(
+                              color: Colors
+                                  .white))); //memanggil fungsi sanckbar dengan pesan deleted
                     }
                   },
                   child: Text("Delete")),

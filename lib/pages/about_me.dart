@@ -1,30 +1,25 @@
 import 'package:flutter/material.dart';
 
-//pendukung program asinkron
-class About_Me extends StatefulWidget {
+
+class About_Me extends StatefulWidget {  // pembuatan class About_me yang memperluaskan statefullwidget
   @override
   About_MeState createState() => About_MeState();
 }
 
-class About_MeState extends State<About_Me> {
+class About_MeState extends State<About_Me> { // class About_meState yang mengextend State
   @override
   Widget build(BuildContext context) {
-    // to get size
+    // untuk memperoleh ukuran
     var size = MediaQuery.of(context).size;
-
-    // style
-    var cardTextStyle = TextStyle(
-        fontFamily: "Montserrat Regular",
-        fontSize: 14,
-        color: Color.fromRGBO(63, 63, 63, 1));
 
     return Scaffold(
       appBar: AppBar(
         title: Text(
           'About Me',
-          style: TextStyle(color: Colors.white, fontSize: 24),
+          style: TextStyle(color: Colors.white, fontSize: 24), //sebagai header
         ),
-        leading: new IconButton(
+        // tombol untuk menuju halaman sebelumnya
+        leading: new IconButton( 
           icon: Icon(
             Icons.keyboard_arrow_left,
             color: Colors.white,
@@ -36,6 +31,7 @@ class About_MeState extends State<About_Me> {
       ),
       body: Stack(
         children: <Widget>[
+          //banner gambar
           Container(
             height: size.height * .3,
             decoration: BoxDecoration(
@@ -49,6 +45,7 @@ class About_MeState extends State<About_Me> {
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
+                  //gambar yang terdapat di atas banner gambar
                   Container(
                     height: 200,
                     margin: EdgeInsets.only(bottom: 20, left: 75, top: 50),
@@ -65,6 +62,7 @@ class About_MeState extends State<About_Me> {
                       ],
                     ),
                   ),
+                  //Text yang merupakan isi dari fitur about me
                   Container(
                     child: Text(
                       "OSY KRISDAYANTI",

@@ -2,23 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:uts_osy/models/calculate.dart';
+import 'package:uts_osy/widgets/detail_resultCalc.dart';
+import 'package:uts_osy/widgets/result_calculating.dart';
 
 // ignore: must_be_immutable
-class CalculateTransaction extends StatefulWidget {
+class CalculateTransaction extends StatefulWidget { // pembuatan class CalculateTransaction yang memperluaskan statefullwidget
   @override
   _CalculateTransactionState createState() => _CalculateTransactionState();
 }
 
-class _CalculateTransactionState extends State<CalculateTransaction> {
+class _CalculateTransactionState extends State<CalculateTransaction> { // class _CalculateTransactionState yang mengextend State
+  //pembuatan text editing controller
   TextEditingController namaC = TextEditingController();
 
   TextEditingController hargaC = TextEditingController();
 
   TextEditingController jumlahC = TextEditingController();
 
-  final minimumPadding = 5.0;
+  final minimumPadding = 5.0; // deklarasi final minimumPadding yang menapung sebanyak 5.0
 
-  final List<Calculate> Carts = [];
+  final List<Calculate> Carts = []; // membuat sebuah list baru dengan nama Cart dari kelas Calculate dengan type final
 
   void SaveItem() {
     // fungsi untuk menyimpan inputan user
@@ -30,9 +33,10 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
       // kondisi jika kosong tidak mengembalikan apa2
       return;
     }
-    _tambahItemBaru(name, price, qty);
+    _tambahItemBaru(name, price, qty); // meemanggil fungsi _tambahItemBaru yang menerima parameter name, price, quantity
   }
 
+  // fungsi untuk menampilkan inputan dari user, akan terus terupdate jika terjadi penambahan inputan baru
   void _tambahItemBaru(String name, int price, int qty) {
     var product = Calculate(
         id: DateTime.now().toString(), name: name, price: price, quantity: qty);
@@ -41,7 +45,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
     });
   }
 
-  void _resetCarts() {
+  void _resetCarts() { // fungsi untuk menghapus semua item yang ada di list Carts
     setState(() {
       Carts.clear();
     });
@@ -67,7 +71,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Calculate Transactions',
+          'Calculate Transactions', //sebagai header
           style: TextStyle(color: Colors.white),
         ),
       ),
@@ -77,6 +81,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
             margin: EdgeInsets.only(top: 29, right: 10, left: 10),
             child: Column(
               children: <Widget>[
+                //pembuatan text field untuk penginputan
                 Padding(
                   padding: EdgeInsets.only(
                     bottom: minimumPadding,
@@ -130,6 +135,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
                     ],
                   ),
                 ),
+                //Tombol untuk perhhitungan
                 Container(
                   margin: EdgeInsets.only(top: 20, bottom: 10),
                   height: 50,
@@ -143,6 +149,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
                     onPressed: SaveItem,
                   ),
                 ),
+                //Calcularing History
                 Container(
                     margin: EdgeInsets.only(top: 12, bottom: 12),
                     child: Row(
@@ -154,157 +161,17 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
                               fontWeight: FontWeight.bold,
                               color: Colors.green,
                             )),
-                        FlatButton(
+                        FlatButton( //tombol untuk menghapus semua item yang ada di listview
                           child: Icon(
                             Icons.delete,
                             color: Colors.red,
                           ),
-                          onPressed: () => _resetCarts(),
+                          onPressed: () => _resetCarts(), //dengan memangil fungsi _resertCarts
                         )
                       ],
                     )),
-                Container(
-                  height: 80,
-                  margin: EdgeInsets.all(8),
-                  child: Card(
-                    elevation: 10,
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Total Purchase    : ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                ),
-                                SizedBox(
-                                  height: 4,
-                                ),
-                                Text(
-                                  jumlah.toString() +
-                                      " pcs ", // memanggil fungsi jumlah untuk menampilkanya
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: <Widget>[
-                                Text(
-                                  "Total Price            : ",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.blue),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  'Rp. ' +
-                                      totalPrice.toStringAsFixed(
-                                          0), // memanggil fungsi jumlahHarga untuk menampilkanya
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.all(8),
-                    height: 300,
-                    child: Carts.isEmpty
-                        ? Column(
-                            children: <Widget>[
-                              Container(
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.only(top: 10),
-                                child: Text("------No History------",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.cyan)),
-                              ),
-                            ],
-                          )
-                        : ListView.builder(
-                            itemCount: Carts.length,
-                            itemBuilder: (context, index) {
-                              int totalPrice =
-                                  Carts[index].price * Carts[index].quantity;
-                              return Card(
-                                elevation: 10,
-                                child: Row(
-                                  children: <Widget>[
-                                    Container(
-                                      margin: EdgeInsets.symmetric(
-                                          vertical: 10, horizontal: 15),
-                                      padding: EdgeInsets.all(10),
-                                      child: Text(
-                                        Carts[index].quantity.toString(),
-                                        style: TextStyle(
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 22),
-                                      ),
-                                    ),
-                                    Container(
-                                      margin: EdgeInsets.all(8),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            'Name - ' + Carts[index].name,
-                                            style: TextStyle(
-                                              color: Colors.green,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                            ),
-                                          ),
-                                          Text(
-                                              'Price           : Rp. ' +
-                                                  Carts[index]
-                                                      .price
-                                                      .toStringAsFixed(0),
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.black)),
-                                          Text(
-                                              'Quantity     : ' +
-                                                  Carts[index]
-                                                      .quantity
-                                                      .toStringAsFixed(0) +
-                                                  ' pcs',
-                                              style: TextStyle(
-                                                  fontSize: 15,
-                                                  color: Colors.black)),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ))
+                ResultOfCalculating(jumlah: jumlah, totalPrice: totalPrice), // Memanggil class ResultOfCalculating yg menerima parameter jumlah dan totalPrice
+                DetailOfResultCalculating(Carts: Carts) //Memanggil class DetailOfResultCalculating yg menerima parameter Carts
               ],
             ),
           ),
@@ -313,3 +180,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
     );
   }
 }
+
+
+
+
