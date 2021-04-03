@@ -39,12 +39,12 @@ class EntryInputState extends State<EntryInput> {
     return Scaffold(
         appBar: AppBar(
           title: entry == null
-              ? Text('Add New Transaction',
+              ? Text('Add New Entry',
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 24))
-              : Text('Edit Transaction'),
+              : Text('Edit Entry'),
           leading: new IconButton(
             icon: Icon(
               Icons.keyboard_arrow_left,

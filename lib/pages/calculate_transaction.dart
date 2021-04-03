@@ -227,7 +227,7 @@ class _CalculateTransactionState extends State<CalculateTransaction> {
                 ),
                 Container(
                     margin: EdgeInsets.all(8),
-                    height: 100,
+                    height: 300,
                     child: Carts.isEmpty
                         ? Column(
                             children: <Widget>[

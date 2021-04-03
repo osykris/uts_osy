@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:uts_osy/pages/about_me.dart';
 import 'package:uts_osy/pages/calculate_transaction.dart';
 import 'package:uts_osy/pages/list_entry.dart';
 import 'package:uts_osy/pages/list_products.dart';
@@ -44,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         CircleAvatar(
-                          radius: 32,
+                          radius: 40,
                           backgroundImage:
                               AssetImage('assets/images/admin.jpg'),
                         ),
@@ -60,14 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: TextStyle(
                                 fontFamily: "Montserrat Medium",
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
                               'OSY - 1931710075 MI2C',
                               style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Colors.white,
                                   fontFamily: "Montserrat Regular"),
                             )
@@ -182,28 +183,37 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                        Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Expanded(
-                                child: Container(
-                                  width: 100,
-                                  child: Image.asset(
-                                      'assets/images/information.png'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => About_Me()),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Container(
+                                    width: 100,
+                                    child: Image.asset(
+                                        'assets/images/information.png'),
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(bottom: 12),
-                                child: Text(
-                                  'About Me',
-                                  style: cardTextStyle,
+                                Container(
+                                  margin: EdgeInsets.only(bottom: 12),
+                                  child: Text(
+                                    'About Me',
+                                    style: cardTextStyle,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -212,6 +222,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 515.0, left: 16, right: 16),
+            child: Container(
+                child: Text(
+              "'Investasikan lagi keuntungan yang diperoleh untuk membangun aset dengan berinvestasi pada properti lainnya dan bukan membeli barang konsumtif.' - Joe Hartanto",
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "Montserrat Regular"),
+            )),
           ),
         ],
       ),
