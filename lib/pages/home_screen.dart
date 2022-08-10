@@ -5,12 +5,14 @@ import 'package:uts_osy/pages/calculate_transaction.dart';
 import 'package:uts_osy/pages/list_entry.dart';
 import 'package:uts_osy/pages/list_products.dart';
 
-class HomeScreen extends StatefulWidget { // pembuatan class HomeScreen yang memperluaskan statefullwidget
+class HomeScreen extends StatefulWidget {
+  // pembuatan class HomeScreen yang memperluaskan statefullwidget
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> { //pembuatan class _HomeScreenState yang mengextend State dari class HomeScreen
+class _HomeScreenState extends State<HomeScreen> {
+  //pembuatan class _HomeScreenState yang mengextend State dari class HomeScreen
   @override
   Widget build(BuildContext context) {
     // to get size
@@ -25,7 +27,8 @@ class _HomeScreenState extends State<HomeScreen> { //pembuatan class _HomeScreen
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Container( //banner
+          Container(
+            //banner
             height: size.height * .3,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -145,72 +148,6 @@ class _HomeScreenState extends State<HomeScreen> { //pembuatan class _HomeScreen
                                   margin: EdgeInsets.only(bottom: 12),
                                   child: Text(
                                     'Purchase Plan',
-                                    style: cardTextStyle,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CalculateTransaction()),
-                            );
-                          },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            elevation: 4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    width: 100,
-                                    child: Image.asset(
-                                        'assets/images/shopping.png'),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 12),
-                                  child: Text(
-                                    'Calculate Transactions',
-                                    style: cardTextStyle,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => About_Me()),
-                            );
-                          },
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8)),
-                            elevation: 4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Expanded(
-                                  child: Container(
-                                    width: 100,
-                                    child: Image.asset(
-                                        'assets/images/information.png'),
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.only(bottom: 12),
-                                  child: Text(
-                                    'About Me',
                                     style: cardTextStyle,
                                   ),
                                 ),
